@@ -147,9 +147,9 @@ bool JuceSynthFrameworkAudioProcessor::isBusesLayoutSupported (const BusesLayout
 
 void JuceSynthFrameworkAudioProcessor::updateFilter()
 {
-    int menuChoice = *tree.getRawParameterValue("filterType");
-    int freq = *tree.getRawParameterValue("filterCutoff");
-    int res = *tree.getRawParameterValue("filterRes");
+    int menuChoice = tree.getRawParameterValue("filterType")->load();
+    int freq = tree.getRawParameterValue("filterCutoff")->load();
+    int res = tree.getRawParameterValue("filterRes")->load();
     
     if (menuChoice == 0)
     {
@@ -180,22 +180,22 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
     {
         if ((myVoice = dynamic_cast<SynthVoice*>(mySynth.getVoice(i))))
         {
-            myVoice->getEnvelopeParams(tree.getRawParameterValue("attack"),
-                                       tree.getRawParameterValue("decay"),
-                                       tree.getRawParameterValue("sustain"),
-                                       tree.getRawParameterValue("release"));
+            myVoice->getEnvelopeParams(tree.getRawParameterValue("attack")->load(),
+                                       tree.getRawParameterValue("decay")->load(),
+                                       tree.getRawParameterValue("sustain")->load(),
+                                       tree.getRawParameterValue("release")->load());
             
-            myVoice->getOscType(tree.getRawParameterValue("wavetype"));
-            myVoice->getOsc2Type(tree.getRawParameterValue("wavetype2"));
+            myVoice->getOscType(tree.getRawParameterValue("wavetype")->load());
+            myVoice->getOsc2Type(tree.getRawParameterValue("wavetype2")->load());
             
-            myVoice->getFilterParams(tree.getRawParameterValue("filterType"),
-                                     tree.getRawParameterValue("filterCutoff"),
-                                     tree.getRawParameterValue("filterRes"));
+            myVoice->getFilterParams(tree.getRawParameterValue("filterType")->load(),
+                                     tree.getRawParameterValue("filterCutoff")->load(),
+                                     tree.getRawParameterValue("filterRes")->load());
             
-            myVoice->getWillsParams(tree.getRawParameterValue("mastergain"),
-                                    tree.getRawParameterValue("blend"),
-                                    tree.getRawParameterValue("pbup"),
-                                    tree.getRawParameterValue("pbdown"));
+            myVoice->getWillsParams(tree.getRawParameterValue("mastergain")->load(),
+                                    tree.getRawParameterValue("blend")->load(),
+                                    tree.getRawParameterValue("pbup")->load(),
+                                    tree.getRawParameterValue("pbdown")->load());
         }
     }
     

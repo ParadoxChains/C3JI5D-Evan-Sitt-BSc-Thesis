@@ -11,7 +11,7 @@
               pluginIsSynth="1" pluginWantsMidiIn="1" pluginProducesMidiOut="1"
               pluginIsMidiEffectPlugin="0" pluginEditorRequiresKeys="0" pluginAUExportPrefix="juceSynthFrameworkAU"
               aaxIdentifier="com.yourcompany.juceSynthFramework" pluginAAXCategory="2"
-              jucerVersion="5.4.5" pluginFormats="buildAU,buildStandalone,buildVST3"
+              jucerVersion="5.4.7" pluginFormats="buildAU,buildStandalone,buildVST3"
               pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn,pluginProducesMidiOut"
               headerPath="../../../Maximilian" pluginRTASDisableBypass="0"
               pluginRTASDisableMultiMono="0" pluginAAXDisableBypass="0" pluginAAXDisableMultiMono="0"

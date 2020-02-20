@@ -43,16 +43,16 @@ public:
         return hertz;
     }
 
-    void getOscType(float* selection)
+    void getOscType(float selection)
     {
-        theWave = *selection;
+        theWave = selection;
         
     }
     
-    void getOsc2Type(float* selection)
+    void getOsc2Type(float selection)
     {
         
-        theWave2 = *selection;
+        theWave2 = selection;
     }
    
     double setOscType ()
@@ -89,12 +89,12 @@ public:
         return sample1 + osc2blend * sample2;
     }
     
-    void getEnvelopeParams(float* attack, float* decay, float* sustain, float* release)
+    void getEnvelopeParams(float attack, float decay, float sustain, float release)
     {
-        env1.setAttack(*attack);
-        env1.setDecay(*decay);
-        env1.setSustain(*sustain);
-        env1.setRelease(*release);
+        env1.setAttack(attack);
+        env1.setDecay(decay);
+        env1.setSustain(sustain);
+        env1.setRelease(release);
     }
     
     double setEnvelope()
@@ -102,19 +102,19 @@ public:
         return env1.adsr(setOscType(), env1.trigger);
     }
     
-    void getWillsParams(float* mGain, float* blend, float* pbup, float* pbdn)
+    void getWillsParams(float mGain, float blend, float pbup, float pbdn)
     {
-        masterGain = *mGain;
-        osc2blend = *blend;
-        pitchBendUpSemitones = *pbup;
-        pitchBendDownSemitones = *pbdn;
+        masterGain = mGain;
+        osc2blend = blend;
+        pitchBendUpSemitones = pbup;
+        pitchBendDownSemitones = pbdn;
     }
     
-    void getFilterParams (float* filterType, float* filterCutoff, float* filterRes)
+    void getFilterParams (float filterType, float filterCutoff, float filterRes)
     {
-        filterChoice = *filterType;
-        cutoff = *filterCutoff;
-        resonance = *filterRes;
+        filterChoice = filterType;
+        cutoff = filterCutoff;
+        resonance = filterRes;
     }
     
     void startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition) override
