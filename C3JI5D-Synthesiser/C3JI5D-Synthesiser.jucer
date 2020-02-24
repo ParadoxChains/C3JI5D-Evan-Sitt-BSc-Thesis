@@ -30,6 +30,16 @@
         <FILE id="Ui1hbj" name="Oscillator2.cpp" compile="1" resource="0" file="Source/Oscillator2.cpp"/>
         <FILE id="Rm8On6" name="Oscillator2.h" compile="0" resource="0" file="Source/Oscillator2.h"/>
       </GROUP>
+      <GROUP id="{FE402C17-A019-5FCE-32B1-065DC8E36DB3}" name="DSP">
+        <FILE id="btxltj" name="Envelopes.cpp" compile="1" resource="0" file="Source/Envelopes.cpp"/>
+        <FILE id="O3CpuF" name="Envelopes.h" compile="0" resource="0" file="Source/Envelopes.h"/>
+        <FILE id="d76Sdx" name="Filters.cpp" compile="1" resource="0" file="Source/Filters.cpp"/>
+        <FILE id="v8sqHc" name="Filters.h" compile="0" resource="0" file="Source/Filters.h"/>
+        <FILE id="GrVcpm" name="WaveformSynthesis.cpp" compile="1" resource="0"
+              file="Source/WaveformSynthesis.cpp"/>
+        <FILE id="Nn9NCO" name="WaveformSynthesis.h" compile="0" resource="0"
+              file="Source/WaveformSynthesis.h"/>
+      </GROUP>
       <GROUP id="{B5469151-45EB-23CF-24BA-61DF6EF9FF89}" name="Maximilian">
         <GROUP id="{36E659AE-2D63-AF3F-01D8-60F300C5308E}" name="libs">
           <FILE id="R49E46" name="fft.cpp" compile="1" resource="0" file="../Maximilian/libs/fft.cpp"/>
