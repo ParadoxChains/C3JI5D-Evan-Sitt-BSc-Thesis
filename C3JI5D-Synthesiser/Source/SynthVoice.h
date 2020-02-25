@@ -3,6 +3,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "SynthSound.h"
 #include "Maximilian.h"
+#include "WaveformSynthesis.h"
 
 class SynthVoice : public SynthesiserVoice
 {
@@ -45,14 +46,14 @@ public:
 
     void getOscType(float selection)
     {
-        theWave = selection;
+        waveTypeSelection_oscillator01 = selection;
         
     }
     
     void getOsc2Type(float selection)
     {
         
-        theWave2 = selection;
+        waveTypeSelection_oscillator02 = selection;
     }
    
     double setOscType ()
@@ -60,33 +61,39 @@ public:
     {
         double sample1, sample2;
         
-        switch (theWave)
+        switch (waveTypeSelection_oscillator01)
         {
             case 0:
-                sample1 = osc1.square(frequency);
+                sample1 = oscillator01.square(frequency);
                 break;
             case 1:
-                sample1 = osc1.saw(frequency);
+                sample1 = oscillator01.saw(frequency);
+                break;
+            case 2:
+                sample1 = oscillator01.triangle(frequency);
                 break;
             default:
-                sample1 = osc1.sinewave(frequency);
+                sample1 = oscillator01.sine(frequency);
                 break;
         }
         
-        switch (theWave2)
+        switch (waveTypeSelection_oscillator02)
         {
             case 0:
-                sample2 = osc2.saw(frequency / 2.0);
+                sample2 = oscillator02.saw(frequency / 2.0);
                 break;
             case 1:
-                sample2 = osc2.square(frequency / 2.0);
+                sample2 = oscillator02.square(frequency / 2.0);
+                break;
+            case 2:
+                sample2 = oscillator02.triangle(frequency / 2.0);
                 break;
             default:
-                sample2 = osc2.sinewave(frequency / 2.0);
+                sample2 = oscillator02.sine(frequency / 2.0);
                 break;
         }
         
-        return sample1 + osc2blend * sample2;
+        return sample1 + mixLevel_oscillator02 * sample2;
     }
     
     void getEnvelopeParams(float attack, float decay, float sustain, float release)
@@ -105,7 +112,7 @@ public:
     void getWillsParams(float mGain, float blend, float pbup, float pbdn)
     {
         masterGain = mGain;
-        osc2blend = blend;
+        mixLevel_oscillator02 = blend;
         pitchBendUpSemitones = pbup;
         pitchBendDownSemitones = pbdn;
     }
@@ -161,10 +168,10 @@ public:
 private:
     double level;
     double frequency;
-    int theWave, theWave2;
+    int waveTypeSelection_oscillator01, waveTypeSelection_oscillator02;
 
     float masterGain;
-    float osc2blend;
+    float mixLevel_oscillator02;
 
     int noteNumber;
     float pitchBend = 0.0f;
@@ -175,6 +182,6 @@ private:
     float cutoff;
     float resonance;
     
-    maxiOsc osc1, osc2;
+    oscillator oscillator01, oscillator02;
     maxiEnv env1;
 };

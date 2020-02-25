@@ -8,7 +8,8 @@ processor(p)
     
     osc2Menu.addItem("Saw", 1);
     osc2Menu.addItem("Square", 2);
-    osc2Menu.addItem("Sine", 3);
+    osc2Menu.addItem("Triangle", 3);
+    osc2Menu.addItem("Sine", 0);
     osc2Menu.setJustificationType(Justification::centred);
     addAndMakeVisible(&osc2Menu);
     

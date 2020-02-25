@@ -1,4 +1,5 @@
 #pragma once
+#include "math.h"
 /*
 The oscillator class will provide values for writing out to the audio buffer.
 */
@@ -12,11 +13,13 @@ public:
 	double square(double frequency);
 	double saw(double frequency);
 	double triangle(double frequency);
-	double pulse(double frequency);
 
 protected:
+
 private:
 	double frequency;
 	double phase;
 	double outputValue;
+	double sampleRate;
+	int waveTableSize;
 };
