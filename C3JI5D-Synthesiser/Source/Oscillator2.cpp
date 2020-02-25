@@ -6,14 +6,14 @@ processor(p)
 {
     setSize(200, 200);
     
-    osc2Menu.addItem("Saw", 1);
-    osc2Menu.addItem("Square", 2);
+    osc2Menu.addItem("Square", 1);
+    osc2Menu.addItem("Saw", 2);
     osc2Menu.addItem("Triangle", 3);
-    osc2Menu.addItem("Sine", 0);
+    osc2Menu.addItem("Sine", 4);
     osc2Menu.setJustificationType(Justification::centred);
     addAndMakeVisible(&osc2Menu);
     
-    waveSelection2 = new AudioProcessorValueTreeState::ComboBoxAttachment (processor.tree, "wavetype2", osc2Menu);
+    waveTypeSelection_oscillator02 = new AudioProcessorValueTreeState::ComboBoxAttachment (processor.tree, "wavetype2", osc2Menu);
     
     Blendslider.setSliderStyle(Slider::SliderStyle::LinearVertical);
     Blendslider.setRange(0.0f, 1.0f);

@@ -4,6 +4,7 @@
 #include "SynthSound.h"
 #include "Maximilian.h"
 #include "WaveformSynthesis.h"
+#include "Envelopes.h"
 
 class SynthVoice : public SynthesiserVoice
 {
@@ -80,10 +81,10 @@ public:
         switch (waveTypeSelection_oscillator02)
         {
             case 0:
-                sample2 = oscillator02.saw(frequency / 2.0);
+                sample2 = oscillator02.square(frequency / 2.0);
                 break;
             case 1:
-                sample2 = oscillator02.square(frequency / 2.0);
+                sample2 = oscillator02.saw(frequency / 2.0);
                 break;
             case 2:
                 sample2 = oscillator02.triangle(frequency / 2.0);
@@ -93,20 +94,20 @@ public:
                 break;
         }
         
-        return sample1 + mixLevel_oscillator02 * sample2;
+        return ((1.0 - mixLevel_oscillator02) * sample1) + (mixLevel_oscillator02 * sample2);
     }
     
     void getEnvelopeParams(float attack, float decay, float sustain, float release)
     {
-        env1.setAttack(attack);
-        env1.setDecay(decay);
-        env1.setSustain(sustain);
-        env1.setRelease(release);
+        envelope01.setAttack(attack);
+        envelope01.setDecay(decay);
+        envelope01.setSustain(sustain);
+        envelope01.setRelease(release);
     }
     
     double setEnvelope()
     {
-        return env1.adsr(setOscType(), env1.trigger);
+        return envelope01.adsr(setOscType(), envelope01.trigger);
     }
     
     void getWillsParams(float mGain, float blend, float pbup, float pbdn)
@@ -127,7 +128,7 @@ public:
     void startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition) override
     {
         noteNumber = midiNoteNumber;
-        env1.trigger = 1;
+        envelope01.trigger = 1;
         setPitchBend(currentPitchWheelPosition);
         frequency = noteHz(noteNumber, pitchBendCents());
         level = velocity;
@@ -135,7 +136,7 @@ public:
     
     void stopNote (float velocity, bool allowTailOff) override
     {
-        env1.trigger = 0;
+        envelope01.trigger = 0;
         allowTailOff = true;
         
         if (velocity == 0)
@@ -183,5 +184,5 @@ private:
     float resonance;
     
     oscillator oscillator01, oscillator02;
-    maxiEnv env1;
+    envelope envelope01;
 };

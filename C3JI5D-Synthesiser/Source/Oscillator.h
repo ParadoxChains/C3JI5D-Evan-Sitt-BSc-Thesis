@@ -15,7 +15,7 @@ public:
 private:
     ComboBox oscMenu;
     
-    ScopedPointer<AudioProcessorValueTreeState::ComboBoxAttachment> waveSelection;
+    ScopedPointer<AudioProcessorValueTreeState::ComboBoxAttachment> waveTypeSelection_oscillator01;
     
     JuceSynthFrameworkAudioProcessor& processor;
     

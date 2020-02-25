@@ -16,7 +16,7 @@ private:
     ComboBox osc2Menu;
     Slider Blendslider;
     
-    ScopedPointer<AudioProcessorValueTreeState::ComboBoxAttachment> waveSelection2;
+    ScopedPointer<AudioProcessorValueTreeState::ComboBoxAttachment> waveTypeSelection_oscillator02;
     ScopedPointer<AudioProcessorValueTreeState::SliderAttachment> blendVal;
     
     JuceSynthFrameworkAudioProcessor& processor;

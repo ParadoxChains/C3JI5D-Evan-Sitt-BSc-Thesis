@@ -9,11 +9,11 @@ processor(p)
     oscMenu.addItem("Square", 1);
     oscMenu.addItem("Saw", 2);
     oscMenu.addItem("Triangle", 3);
-    oscMenu.addItem("Sine", 0);
+    oscMenu.addItem("Sine", 4);
     oscMenu.setJustificationType(Justification::centred);
     addAndMakeVisible(&oscMenu);
     
-    waveSelection = new AudioProcessorValueTreeState::ComboBoxAttachment (processor.tree, "wavetype", oscMenu);
+    waveTypeSelection_oscillator01 = new AudioProcessorValueTreeState::ComboBoxAttachment (processor.tree, "wavetype", oscMenu);
 }
 
 Oscillator::~Oscillator()
