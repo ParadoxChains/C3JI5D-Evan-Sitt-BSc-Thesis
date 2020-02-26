@@ -6,10 +6,8 @@ processor(p)
 {
     setSize(200, 200);
     
-    osc2Menu.addItem("Square", 1);
-    osc2Menu.addItem("Saw", 2);
-    osc2Menu.addItem("Triangle", 3);
-    osc2Menu.addItem("Sine", 4);
+    osc2Menu.addItemList(processor.tree.getParameter("wavetype")->getAllValueStrings(), 1);
+
     osc2Menu.setJustificationType(Justification::centred);
     addAndMakeVisible(&osc2Menu);
     

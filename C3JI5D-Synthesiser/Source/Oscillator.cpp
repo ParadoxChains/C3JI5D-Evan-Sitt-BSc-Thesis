@@ -5,11 +5,9 @@ Oscillator::Oscillator(JuceSynthFrameworkAudioProcessor& p) :
 processor(p)
 {
     setSize(200, 200);
-    
-    oscMenu.addItem("Square", 1);
-    oscMenu.addItem("Saw", 2);
-    oscMenu.addItem("Triangle", 3);
-    oscMenu.addItem("Sine", 4);
+
+    oscMenu.addItemList(processor.tree.getParameter("wavetype")->getAllValueStrings(), 1);
+
     oscMenu.setJustificationType(Justification::centred);
     addAndMakeVisible(&oscMenu);
     
