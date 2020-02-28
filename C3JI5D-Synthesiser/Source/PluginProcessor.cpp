@@ -19,11 +19,16 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
             std::make_unique<AudioParameterFloat>("release", "Release", NormalisableRange<float>(0.1f, 5000.0f), 0.1f),
 
             std::make_unique<AudioParameterChoice>("wavetype",
-                                        TRANS("Wave Type"),
-                                        StringArray("Square", "Saw", "Triangle", "Sine"),
-                                        0),
+                                             TRANS("Wave Type"),
+                                       StringArray("Square", "Saw", "Triangle", "Sine"),
+                                                  0),
 
-            std::make_unique<AudioParameterFloat>("filterType", "FilterType", NormalisableRange<float>(0.0f, 2.0f), 0.0f),
+            //std::make_unique<AudioParameterFloat>("filterType", "FilterType", NormalisableRange<float>(0.0f, 2.0f), 0.0f),
+
+            std::make_unique<AudioParameterChoice>("filterType",
+                                            TRANS("Filter Type"),
+                                      StringArray("Low Pass","High Pass","Band Pass"),
+                                                 0),
             std::make_unique<AudioParameterFloat>("filterCutoff", "FilterCutoff", NormalisableRange<float>(20.0f, 10000.0f), 400.0f),
             std::make_unique<AudioParameterFloat>("filterRes", "FilterRes", NormalisableRange<float>(1.0f, 5.0f), 1.0f),
 
