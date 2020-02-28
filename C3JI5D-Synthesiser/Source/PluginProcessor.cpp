@@ -22,8 +22,10 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
                                              TRANS("Wave Type"),
                                        StringArray("Square", "Saw", "Triangle", "Sine"),
                                                   0),
-
-            //std::make_unique<AudioParameterFloat>("filterType", "FilterType", NormalisableRange<float>(0.0f, 2.0f), 0.0f),
+            std::make_unique<AudioParameterChoice>("wavetype2",
+                                             TRANS("Wave Type 2"),
+                                       StringArray("Square", "Saw", "Triangle"/*, "Sine"*/),
+                                                  0),
 
             std::make_unique<AudioParameterChoice>("filterType",
                                             TRANS("Filter Type"),
@@ -32,7 +34,7 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
             std::make_unique<AudioParameterFloat>("filterCutoff", "FilterCutoff", NormalisableRange<float>(20.0f, 10000.0f), 400.0f),
             std::make_unique<AudioParameterFloat>("filterRes", "FilterRes", NormalisableRange<float>(1.0f, 5.0f), 1.0f),
 
-            std::make_unique<AudioParameterFloat>("blend", "Osc2Blend", NormalisableRange<float>(0.0f, 1.0f), 0.6f),
+            std::make_unique<AudioParameterFloat>("blend", "Osc2Blend", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
 
             std::make_unique<AudioParameterFloat>("mastergain", "MasterGain", NormalisableRange<float>(0.0f, 1.0f), 0.7f),
 
@@ -198,11 +200,8 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
                                        tree.getRawParameterValue("release")->load());
             
             myVoice->getOscType(tree.getRawParameterValue("wavetype")->load());
-            myVoice->getOsc2Type(tree.getRawParameterValue("wavetype")->load());
+            myVoice->getOsc2Type(tree.getRawParameterValue("wavetype2")->load());
             
-            myVoice->getFilterParams(tree.getRawParameterValue("filterType")->load(),
-                                     tree.getRawParameterValue("filterCutoff")->load(),
-                                     tree.getRawParameterValue("filterRes")->load());
             
             myVoice->getWillsParams(tree.getRawParameterValue("mastergain")->load(),
                                     tree.getRawParameterValue("blend")->load(),

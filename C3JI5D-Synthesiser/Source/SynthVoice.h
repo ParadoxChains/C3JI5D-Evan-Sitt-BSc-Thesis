@@ -118,13 +118,7 @@ public:
         pitchBendDownSemitones = pbdn;
     }
     
-    void getFilterParams (float filterType, float filterCutoff, float filterRes)
-    {
-        filterChoice = filterType;
-        cutoff = filterCutoff;
-        resonance = filterRes;
-    }
-    
+
     void startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition) override
     {
         noteNumber = midiNoteNumber;
