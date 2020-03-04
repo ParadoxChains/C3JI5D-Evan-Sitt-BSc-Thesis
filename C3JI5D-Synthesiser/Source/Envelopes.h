@@ -1,7 +1,7 @@
 #pragma once
 #include "math.h"
-class envelope {
-
+class envelope
+{
 
 public:
 	envelope();
@@ -24,5 +24,5 @@ public:
 	long holdtime = 1;
 	long holdcount;
 	int attackphase, decayphase, sustainphase, holdphase, releasephase;
-	double sampleRate;
+	int sampleRate;
 };

@@ -5,6 +5,7 @@
 #include "Maximilian.h"
 #include "WaveformSynthesis.h"
 #include "Envelopes.h"
+#include "Filters.h"
 
 class SynthVoice : public SynthesiserVoice
 {
@@ -17,6 +18,7 @@ public:
     void setSampleRates(int sampleRate)
     {
         envelope01.setSampleRate(sampleRate);
+        filter01.setSampleRate(sampleRate);
 
     }
 
@@ -215,5 +217,5 @@ private:
     
     oscillator oscillator01, oscillator02;
     envelope envelope01;
-    maxiFilter filter01;
+    filter filter01;
 };
