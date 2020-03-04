@@ -14,6 +14,12 @@ public:
         return dynamic_cast <SynthSound*>(sound) != nullptr;
     }
     
+    void setSampleRates(int sampleRate)
+    {
+        envelope01.setSampleRate(sampleRate);
+
+    }
+
     void setPitchBend(int pitchWheelPos)
     {
         if (pitchWheelPos > 8192)
@@ -105,9 +111,9 @@ public:
         envelope01.setRelease(release);
     }
     
-    double setEnvelope()
+    double setEnvelope(double sample)
     {
-        return envelope01.adsr(setOscType(), envelope01.trigger);
+        return envelope01.adsr(sample, envelope01.trigger);
     }
     
     void getWillsParams(float mGain, float blend, float pbup, float pbdn)
@@ -118,6 +124,31 @@ public:
         pitchBendDownSemitones = pbdn;
     }
     
+    void getFilterParams(float filterType, float filterCutoff, float filterRes)
+    {
+        filterChoice = filterType;
+        cutoff = filterCutoff;
+        resonance = filterRes;
+    }
+
+    double setFilter(double sample)
+    {
+        /*
+        switch (filterChoice)
+        {
+        case 0:
+            return filter01.lores(sample, cutoff, resonance);
+        case 1:
+            return filter01.hires(sample, cutoff, resonance);
+        case 2:
+            return filter01.bandpass(sample, cutoff, resonance);
+        default:
+            return sample;
+            break;
+        }
+        */
+        return sample;
+    }
 
     void startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition) override
     {
@@ -147,6 +178,11 @@ public:
     {
         
     }
+
+    double giveSample()
+    {
+        return masterGain * setFilter(setEnvelope(setOscType()));
+    }
     
     void renderNextBlock (AudioBuffer <float> &outputBuffer, int startSample, int numSamples) override
     {
@@ -154,7 +190,7 @@ public:
         {
             for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
             {
-                outputBuffer.addSample(channel, startSample, setEnvelope() * masterGain);
+                outputBuffer.addSample(channel, startSample, giveSample());
             }
             ++startSample;
         }
@@ -179,4 +215,5 @@ private:
     
     oscillator oscillator01, oscillator02;
     envelope envelope01;
+    maxiFilter filter01;
 };

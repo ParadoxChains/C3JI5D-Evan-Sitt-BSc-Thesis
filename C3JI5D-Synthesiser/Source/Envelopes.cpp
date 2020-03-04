@@ -5,6 +5,11 @@ envelope::envelope()
     sampleRate = 48000;
 }
 
+void envelope::setSampleRate(int newSampleRate)
+{
+    sampleRate = newSampleRate;
+}
+
 double envelope::ar(double input, double attack, double release, long holdtime, int trigger) {
 
     if (trigger == 1 && attackphase != 1 && holdphase != 1)

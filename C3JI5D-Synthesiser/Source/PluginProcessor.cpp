@@ -131,6 +131,7 @@ void JuceSynthFrameworkAudioProcessor::prepareToPlay (double sampleRate, int sam
     stateVariableFilter.reset();
     stateVariableFilter.prepare(spec);
     updateFilter();
+    
 }
 
 void JuceSynthFrameworkAudioProcessor::releaseResources()
@@ -161,6 +162,8 @@ bool JuceSynthFrameworkAudioProcessor::isBusesLayoutSupported (const BusesLayout
 
 void JuceSynthFrameworkAudioProcessor::updateFilter()
 {
+
+    
     int menuChoice = tree.getRawParameterValue("filterType")->load();
     int freq = tree.getRawParameterValue("filterCutoff")->load();
     int res = tree.getRawParameterValue("filterRes")->load();
@@ -182,6 +185,7 @@ void JuceSynthFrameworkAudioProcessor::updateFilter()
         stateVariableFilter.state->type = dsp::StateVariableFilter::Parameters<float>::Type::bandPass;
         stateVariableFilter.state->setCutOffFrequency(lastSampleRate, freq, res);
     }
+    
 }
 
 void JuceSynthFrameworkAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& midiMessages)
@@ -194,27 +198,40 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
     {
         if ((myVoice = dynamic_cast<SynthVoice*>(mySynth.getVoice(i))))
         {
-            myVoice->getEnvelopeParams(tree.getRawParameterValue("attack")->load(),
-                                       tree.getRawParameterValue("decay")->load(),
-                                       tree.getRawParameterValue("sustain")->load(),
-                                       tree.getRawParameterValue("release")->load());
+            myVoice->setSampleRates(48000);
+
+            myVoice->getFilterParams(
+                tree.getRawParameterValue("filterType")->load(),
+                tree.getRawParameterValue("filterCutoff")->load(),
+                tree.getRawParameterValue("filterRes")->load()
+            );
+            myVoice->getEnvelopeParams(
+                tree.getRawParameterValue("attack")->load(),
+                tree.getRawParameterValue("decay")->load(),
+                tree.getRawParameterValue("sustain")->load(),
+                tree.getRawParameterValue("release")->load()
+            );
             
             myVoice->getOscType(tree.getRawParameterValue("wavetype")->load());
             myVoice->getOsc2Type(tree.getRawParameterValue("wavetype2")->load());
             
             
-            myVoice->getWillsParams(tree.getRawParameterValue("mastergain")->load(),
-                                    tree.getRawParameterValue("blend")->load(),
-                                    tree.getRawParameterValue("pbup")->load(),
-                                    tree.getRawParameterValue("pbdown")->load());
+            myVoice->getWillsParams(
+                tree.getRawParameterValue("mastergain")->load(),
+                tree.getRawParameterValue("blend")->load(),
+                tree.getRawParameterValue("pbup")->load(),
+                tree.getRawParameterValue("pbdown")->load()
+            );
         }
     }
     
     buffer.clear();
     mySynth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+    
     updateFilter();
     dsp::AudioBlock<float> block (buffer);
     stateVariableFilter.process(dsp::ProcessContextReplacing<float> (block));
+    
 }
 
 bool JuceSynthFrameworkAudioProcessor::hasEditor() const
