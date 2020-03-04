@@ -20,9 +20,9 @@ public:
 	void setSampleRate(int newSampleRate);
 	double cutoff;
 	double resonance;
-	double lopass(double sample, double cutoff);
-	double hipass(double sample, double cutoff);
-	double lores(double sample, double newCutoff, double resonance);
-	double hires(double sample, double newCutoff, double resonance);
-	double bandpass(double sample, double newCutoff, double resonance);
+	double lowPass(double sample, double cutoff);
+	double highPass(double sample, double cutoff);
+	double lowPassResonance(double sample, double newCutoff, double resonance);
+	double highPassResonance(double sample, double newCutoff, double resonance);
+	double bandPass(double sample, double newCutoff, double resonance);
 };

@@ -135,21 +135,21 @@ public:
 
     double setFilter(double sample)
     {
-        /*
+        
         switch (filterChoice)
         {
         case 0:
-            return filter01.lores(sample, cutoff, resonance);
+            return filter01.lowPassResonance(sample, cutoff, resonance);
         case 1:
-            return filter01.hires(sample, cutoff, resonance);
+            return filter01.highPassResonance(sample, cutoff, resonance);
         case 2:
-            return filter01.bandpass(sample, cutoff, resonance);
+            return filter01.bandPass(sample, cutoff, resonance);
         default:
             return sample;
             break;
         }
-        */
-        return sample;
+        
+        //return sample;
     }
 
     void startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition) override
