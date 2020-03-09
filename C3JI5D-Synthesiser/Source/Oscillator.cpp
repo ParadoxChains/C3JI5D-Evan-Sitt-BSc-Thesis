@@ -5,14 +5,13 @@ Oscillator::Oscillator(JuceSynthFrameworkAudioProcessor& p) :
 processor(p)
 {
     setSize(200, 200);
-    
-    oscMenu.addItem("Square", 1);
-    oscMenu.addItem("Saw", 2);
-    oscMenu.addItem("Sine", 3);
+
+    oscMenu.addItemList(processor.tree.getParameter("wavetype")->getAllValueStrings(), 1);
+
     oscMenu.setJustificationType(Justification::centred);
     addAndMakeVisible(&oscMenu);
     
-    waveSelection = new AudioProcessorValueTreeState::ComboBoxAttachment (processor.tree, "wavetype", oscMenu);
+    waveTypeSelection_oscillator01 = new AudioProcessorValueTreeState::ComboBoxAttachment (processor.tree, "wavetype", oscMenu);
 }
 
 Oscillator::~Oscillator()

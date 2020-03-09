@@ -3,6 +3,9 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "SynthSound.h"
 #include "Maximilian.h"
+#include "WaveformSynthesis.h"
+#include "Envelopes.h"
+#include "Filters.h"
 
 class SynthVoice : public SynthesiserVoice
 {
@@ -12,6 +15,13 @@ public:
         return dynamic_cast <SynthSound*>(sound) != nullptr;
     }
     
+    void setSampleRates(int sampleRate)
+    {
+        envelope01.setSampleRate(sampleRate);
+        filter01.setSampleRate(sampleRate);
+
+    }
+
     void setPitchBend(int pitchWheelPos)
     {
         if (pitchWheelPos > 8192)
@@ -45,14 +55,14 @@ public:
 
     void getOscType(float selection)
     {
-        theWave = selection;
+        waveTypeSelection_oscillator01 = selection;
         
     }
     
     void getOsc2Type(float selection)
     {
         
-        theWave2 = selection;
+        waveTypeSelection_oscillator02 = selection;
     }
    
     double setOscType ()
@@ -60,67 +70,92 @@ public:
     {
         double sample1, sample2;
         
-        switch (theWave)
+        switch (waveTypeSelection_oscillator01)
         {
             case 0:
-                sample1 = osc1.square(frequency);
+                sample1 = oscillator01.square(frequency);
                 break;
             case 1:
-                sample1 = osc1.saw(frequency);
+                sample1 = oscillator01.saw(frequency);
+                break;
+            case 2:
+                sample1 = oscillator01.triangle(frequency);
                 break;
             default:
-                sample1 = osc1.sinewave(frequency);
+                sample1 = oscillator01.sine(frequency);
                 break;
         }
         
-        switch (theWave2)
+        switch (waveTypeSelection_oscillator02)
         {
             case 0:
-                sample2 = osc2.saw(frequency / 2.0);
+                sample2 = oscillator02.square(frequency / 2.0);
                 break;
             case 1:
-                sample2 = osc2.square(frequency / 2.0);
+                sample2 = oscillator02.saw(frequency / 2.0);
+                break;
+            case 2:
+                sample2 = oscillator02.triangle(frequency / 2.0);
                 break;
             default:
-                sample2 = osc2.sinewave(frequency / 2.0);
+                sample2 = oscillator02.sine(frequency / 2.0);
                 break;
         }
         
-        return sample1 + osc2blend * sample2;
+        return ((1.0 - mixLevel_oscillator02) * sample1) + (mixLevel_oscillator02 * sample2);
     }
     
     void getEnvelopeParams(float attack, float decay, float sustain, float release)
     {
-        env1.setAttack(attack);
-        env1.setDecay(decay);
-        env1.setSustain(sustain);
-        env1.setRelease(release);
+        envelope01.setAttack(attack);
+        envelope01.setDecay(decay);
+        envelope01.setSustain(sustain);
+        envelope01.setRelease(release);
     }
     
-    double setEnvelope()
+    double setEnvelope(double sample)
     {
-        return env1.adsr(setOscType(), env1.trigger);
+        return envelope01.adsr(sample, envelope01.trigger);
     }
     
     void getWillsParams(float mGain, float blend, float pbup, float pbdn)
     {
         masterGain = mGain;
-        osc2blend = blend;
+        mixLevel_oscillator02 = blend;
         pitchBendUpSemitones = pbup;
         pitchBendDownSemitones = pbdn;
     }
     
-    void getFilterParams (float filterType, float filterCutoff, float filterRes)
+    void getFilterParams(float filterType, float filterCutoff, float filterRes)
     {
         filterChoice = filterType;
         cutoff = filterCutoff;
         resonance = filterRes;
     }
-    
+
+    double setFilter(double sample)
+    {
+        
+        switch (filterChoice)
+        {
+        case 0:
+            return filter01.lowPassResonance(sample, cutoff, resonance);
+        case 1:
+            return filter01.highPassResonance(sample, cutoff, resonance);
+        case 2:
+            return filter01.bandPass(sample, cutoff, resonance);
+        default:
+            return sample;
+            break;
+        }
+        
+        //return sample;
+    }
+
     void startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition) override
     {
         noteNumber = midiNoteNumber;
-        env1.trigger = 1;
+        envelope01.trigger = 1;
         setPitchBend(currentPitchWheelPosition);
         frequency = noteHz(noteNumber, pitchBendCents());
         level = velocity;
@@ -128,7 +163,7 @@ public:
     
     void stopNote (float velocity, bool allowTailOff) override
     {
-        env1.trigger = 0;
+        envelope01.trigger = 0;
         allowTailOff = true;
         
         if (velocity == 0)
@@ -145,6 +180,11 @@ public:
     {
         
     }
+
+    double giveSample()
+    {
+        return masterGain * setFilter(setEnvelope(setOscType()));
+    }
     
     void renderNextBlock (AudioBuffer <float> &outputBuffer, int startSample, int numSamples) override
     {
@@ -152,7 +192,7 @@ public:
         {
             for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
             {
-                outputBuffer.addSample(channel, startSample, setEnvelope() * masterGain);
+                outputBuffer.addSample(channel, startSample, giveSample());
             }
             ++startSample;
         }
@@ -161,10 +201,10 @@ public:
 private:
     double level;
     double frequency;
-    int theWave, theWave2;
+    int waveTypeSelection_oscillator01, waveTypeSelection_oscillator02;
 
     float masterGain;
-    float osc2blend;
+    float mixLevel_oscillator02;
 
     int noteNumber;
     float pitchBend = 0.0f;
@@ -175,6 +215,7 @@ private:
     float cutoff;
     float resonance;
     
-    maxiOsc osc1, osc2;
-    maxiEnv env1;
+    oscillator oscillator01, oscillator02;
+    envelope envelope01;
+    filter filter01;
 };

@@ -6,11 +6,11 @@ processor(p)
 {
     setSize(200, 200);
     
-    filterMenu.addItem("Low Pass", 1);
-    filterMenu.addItem("High Pass", 2);
-    filterMenu.addItem("Band Pass", 3);
+    filterMenu.addItemList(processor.tree.getParameter("filterType")->getAllValueStrings(), 1);
+
     filterMenu.setJustificationType(Justification::centred);
     addAndMakeVisible(&filterMenu);
+    
     filterTypeVal = new AudioProcessorValueTreeState::ComboBoxAttachment (processor.tree, "filterType", filterMenu);
     
     filterCutoff.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
