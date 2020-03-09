@@ -6,6 +6,7 @@
 #include "WaveformSynthesis.h"
 #include "Envelopes.h"
 #include "Filters.h"
+#include "Delays.h"
 
 class SynthVoice : public SynthesiserVoice
 {

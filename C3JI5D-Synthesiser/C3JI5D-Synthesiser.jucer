@@ -31,6 +31,8 @@
         <FILE id="Rm8On6" name="Oscillator2.h" compile="0" resource="0" file="Source/Oscillator2.h"/>
       </GROUP>
       <GROUP id="{FE402C17-A019-5FCE-32B1-065DC8E36DB3}" name="DSP">
+        <FILE id="UJxar6" name="Delays.cpp" compile="1" resource="0" file="Source/Delays.cpp"/>
+        <FILE id="W4KNhU" name="Delays.h" compile="0" resource="0" file="Source/Delays.h"/>
         <FILE id="btxltj" name="Envelopes.cpp" compile="1" resource="0" file="Source/Envelopes.cpp"/>
         <FILE id="O3CpuF" name="Envelopes.h" compile="0" resource="0" file="Source/Envelopes.h"/>
         <FILE id="d76Sdx" name="Filters.cpp" compile="1" resource="0" file="Source/Filters.cpp"/>
