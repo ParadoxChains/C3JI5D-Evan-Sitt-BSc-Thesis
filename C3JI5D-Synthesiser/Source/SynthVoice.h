@@ -2,7 +2,6 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "SynthSound.h"
-//#include "Maximilian.h"
 #include "WaveformSynthesis.h"
 #include "Envelopes.h"
 #include "Filters.h"
@@ -153,6 +152,29 @@ public:
         //return sample;
     }
 
+    void getDelayParams(float delayType, float dTime, float dFeedback, float dSpeed, float dDepth)
+    {
+        delayChoice = delayType;
+        delayTime = dTime;
+        delayFeedback = dFeedback;
+        delaySpeed = dSpeed;
+        delayDepth = dDepth;
+    }
+
+    double setDelay(double sample)
+    {
+        switch (delayChoice)
+        {
+        case 0:
+            return delay01.dl(sample, delayTime, delayFeedback);
+        case 1:
+            return flanger01.flange(sample, delayTime, delayFeedback, delaySpeed, delayDepth);
+        default:
+            return sample;
+            break;
+        }
+    }
+
     void startNote (int midiNoteNumber, float velocity, SynthesiserSound* sound, int currentPitchWheelPosition) override
     {
         noteNumber = midiNoteNumber;
@@ -184,7 +206,7 @@ public:
 
     double giveSample()
     {
-        return masterGain * setFilter(setEnvelope(setOscType()));
+        return masterGain * /*setDelay(*/setFilter(setEnvelope(setOscType()))/*)*/;
     }
     
     void renderNextBlock (AudioBuffer <float> &outputBuffer, int startSample, int numSamples) override
@@ -215,8 +237,16 @@ private:
     int filterChoice;
     float cutoff;
     float resonance;
+
+    int delayChoice;
+    float delayTime;
+    float delayFeedback;
+    float delaySpeed;
+    float delayDepth;
     
     oscillator oscillator01, oscillator02;
     envelope envelope01;
     filter filter01;
+    delay_chain delay01;
+    flanger flanger01;
 };

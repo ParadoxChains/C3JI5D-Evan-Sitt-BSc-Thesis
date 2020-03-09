@@ -18,7 +18,7 @@ processor(p)
     filterCutoff.setValue (400.0);
     filterCutoff.setTextBoxStyle(Slider::NoTextBox, false, 0, 0);
     addAndMakeVisible(&filterCutoff);
-    filterVal = new AudioProcessorValueTreeState::SliderAttachment (processor.tree, "filterCutoff", filterCutoff);
+    filterCutoffVal = new AudioProcessorValueTreeState::SliderAttachment (processor.tree, "filterCutoff", filterCutoff);
     filterCutoff.setSkewFactorFromMidPoint(1000.0);
     
     filterRes.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);

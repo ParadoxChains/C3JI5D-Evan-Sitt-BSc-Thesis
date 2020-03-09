@@ -19,6 +19,8 @@
   <MAINGROUP id="Z0T8fs" name="Evan Sitt Synthesiser">
     <GROUP id="{FDD0FFB0-7ABA-CAD0-AB6D-A607E5623CAE}" name="Source">
       <GROUP id="{52D67643-5272-5540-74BB-D17C6972D3E4}" name="GUI_Elements">
+        <FILE id="nOufey" name="Delay.cpp" compile="1" resource="0" file="Source/Delay.cpp"/>
+        <FILE id="vGyWUZ" name="Delay.h" compile="0" resource="0" file="Source/Delay.h"/>
         <FILE id="mAxG7m" name="Oscillator.cpp" compile="1" resource="0" file="Source/Oscillator.cpp"/>
         <FILE id="lwHWX8" name="Oscillator.h" compile="0" resource="0" file="Source/Oscillator.h"/>
         <FILE id="shQvqD" name="Envelope.cpp" compile="1" resource="0" file="Source/Envelope.cpp"/>

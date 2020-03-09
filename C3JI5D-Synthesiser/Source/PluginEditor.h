@@ -7,6 +7,7 @@
 #include "Envelope.h"
 #include "Filter.h"
 #include "Frontgui.h"
+#include "Delay.h"
 
 
 class JuceSynthFrameworkAudioProcessorEditor  : public AudioProcessorEditor
@@ -28,7 +29,9 @@ private:
     Oscillator2 osc2Gui;
     Envelope envGui;
     Filter filterGui;
+    Delay delayGui;
     Frontgui frontGui;
+
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JuceSynthFrameworkAudioProcessorEditor)
 };
