@@ -1,5 +1,8 @@
 #pragma once
 #include "math.h";
+#include <cstdlib>;
+#include <stdint.h>;
+#include <string.h>;
 #include "WaveformSynthesis.h";
 #include "Filters.h";
 
@@ -49,23 +52,3 @@ inline double flanger::flange(const double input, const unsigned int delay, cons
     return (output + input) / 2.0;
 }
 
-class chorus {
-public:
-    double chorus(const double input, const unsigned int delay, const double feedback, const double speed, const double depth);
-    delay_chain delay01, delay02;
-    oscillator lfo;
-    filter lowPassFilter;
-
-};
-
-inline double chorus::chorus(const double input, const unsigned int delay, const double feedback, const double speed, const double depth)
-{
-    double output1, output2;
-    double lfoVal = lfo.noise();
-    lfoVal = lowPassFilter.lowPassResonance(lfoVal, speed, 1.0) * 2.0;
-    output1 = delay01.dl(input, delay + (lfoVal * depth * delay) + 1, feedback);
-    output2 = delay02.dl(input, (delay + (lfoVal * depth * delay * 1.02) + 1) * 0.98, feedback * 0.99);
-    output1 *= (1.0 - fabs(output1));
-    output2 *= (1.0 - fabs(output2));
-    return (output1 + output2 + input) / 3.0;
-}

@@ -2,7 +2,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "SynthSound.h"
-#include "Maximilian.h"
+//#include "Maximilian.h"
 #include "WaveformSynthesis.h"
 #include "Envelopes.h"
 #include "Filters.h"

@@ -1,6 +1,6 @@
 #include "Delays.h"
 
-
+float chandiv = 1;
 
 delay_chain::delay_chain() {
     memset(memory, 0, 88200 * sizeof(double));
@@ -42,12 +42,12 @@ fractional_delay::fractional_delay(void) {
 double fractional_delay::dl(double sig, double delayTime, double feedback)
 {
     delayTime = fmin(fabs(delayTime), delaySize);
-    int32_t delay = delayTime; 
-    double fractAmount = delayTime - delay;
+    int32_t delayT = delayTime; 
+    double fractAmount = delayTime - delayT;
     double truncAmount = 1.0f - fractAmount;
 
 
-    readPointer = writePointer - delay;
+    readPointer = writePointer - delayT;
     if (readPointer < 0)
     {
         readPointer += delaySize;
