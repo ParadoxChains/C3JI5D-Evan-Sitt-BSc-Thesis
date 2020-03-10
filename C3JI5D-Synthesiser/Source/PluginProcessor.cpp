@@ -26,6 +26,10 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
                                              TRANS("Wave Type 2"),
                                        StringArray("Square", "Saw", "Triangle"/*, "Sine"*/),
                                                   0),
+            std::make_unique<AudioParameterChoice>("wavetype3",
+                                             TRANS("Wave Type 3"),
+                                       StringArray("Square", "Saw", "Triangle"/*, "Sine"*/),
+                                                  0),
 
             std::make_unique<AudioParameterChoice>("filterType",
                                             TRANS("Filter Type"),
@@ -45,6 +49,7 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
             std::make_unique<AudioParameterFloat>("delayDepth", "DelayDepth", NormalisableRange<float>(1.0f, 5.0f), 1.0f),
 
             std::make_unique<AudioParameterFloat>("blend", "Osc2Blend", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
+            std::make_unique<AudioParameterFloat>("blend2", "Osc3Blend", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
 
             std::make_unique<AudioParameterFloat>("mastergain", "MasterGain", NormalisableRange<float>(0.0f, 1.0f), 0.7f),
 
@@ -233,11 +238,13 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
             
             myVoice->getOscType(tree.getRawParameterValue("wavetype")->load());
             myVoice->getOsc2Type(tree.getRawParameterValue("wavetype2")->load());
+            myVoice->getOsc3Type(tree.getRawParameterValue("wavetype3")->load());
             
             
             myVoice->getWillsParams(
                 tree.getRawParameterValue("mastergain")->load(),
                 tree.getRawParameterValue("blend")->load(),
+                tree.getRawParameterValue("blend2")->load(),
                 tree.getRawParameterValue("pbup")->load(),
                 tree.getRawParameterValue("pbdown")->load()
             );

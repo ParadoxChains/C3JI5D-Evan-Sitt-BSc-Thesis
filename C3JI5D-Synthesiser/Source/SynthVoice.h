@@ -65,10 +65,17 @@ public:
         waveTypeSelection_oscillator02 = selection;
     }
    
+    void getOsc3Type(float selection)
+    {
+
+        waveTypeSelection_oscillator03 = selection;
+    }
+
+
     double setOscType ()
     
     {
-        double sample1, sample2;
+        double sample1, sample2, sample3;
         
         switch (waveTypeSelection_oscillator01)
         {
@@ -101,8 +108,24 @@ public:
                 sample2 = oscillator02.sine(frequency / 2.0);
                 break;
         }
+
+        switch (waveTypeSelection_oscillator03)
+        {
+        case 0:
+            sample3 = oscillator03.square(frequency / 2.0);
+            break;
+        case 1:
+            sample3 = oscillator03.saw(frequency / 2.0);
+            break;
+        case 2:
+            sample3 = oscillator03.triangle(frequency / 2.0);
+            break;
+        default:
+            sample3 = oscillator03.sine(frequency / 2.0);
+            break;
+        }
         
-        return ((1.0 - mixLevel_oscillator02) * sample1) + (mixLevel_oscillator02 * sample2);
+        return ((1.0 - mixLevel_oscillator02) * sample1) + (mixLevel_oscillator02 * sample2) - (mixLevel_oscillator03 * sample3);
     }
     
     void getEnvelopeParams(float attack, float decay, float sustain, float release)
@@ -118,10 +141,11 @@ public:
         return envelope01.adsr(sample, envelope01.trigger);
     }
     
-    void getWillsParams(float mGain, float blend, float pbup, float pbdn)
+    void getWillsParams(float mGain, float blend, float blend2, float pbup, float pbdn)
     {
         masterGain = mGain;
         mixLevel_oscillator02 = blend;
+        mixLevel_oscillator03 = blend2;
         pitchBendUpSemitones = pbup;
         pitchBendDownSemitones = pbdn;
     }
@@ -224,10 +248,10 @@ public:
 private:
     double level;
     double frequency;
-    int waveTypeSelection_oscillator01, waveTypeSelection_oscillator02;
+    int waveTypeSelection_oscillator01, waveTypeSelection_oscillator02, waveTypeSelection_oscillator03;
 
     float masterGain;
-    float mixLevel_oscillator02;
+    float mixLevel_oscillator02, mixLevel_oscillator03;
 
     int noteNumber;
     float pitchBend = 0.0f;
@@ -244,7 +268,7 @@ private:
     float delaySpeed;
     float delayDepth;
     
-    oscillator oscillator01, oscillator02;
+    oscillator oscillator01, oscillator02, oscillator03;
     envelope envelope01;
     filter filter01;
     delay_chain delay01;

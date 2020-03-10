@@ -32,7 +32,7 @@ void Oscillator2::paint (Graphics& g)
     
     g.fillAll (Colours::powderblue);
     g.setColour(Colours::slategrey);
-    g.drawText("Oscillator Two", titleArea, Justification::centredTop);
+    g.drawText("Additive Oscillator", titleArea, Justification::centredTop);
     
     juce::Rectangle <float> area (25, 25, 150, 150);
     

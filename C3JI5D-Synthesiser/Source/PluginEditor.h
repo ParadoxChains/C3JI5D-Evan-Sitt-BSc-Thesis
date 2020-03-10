@@ -4,6 +4,7 @@
 #include "PluginProcessor.h"
 #include "Oscillator.h"
 #include "Oscillator2.h"
+#include "Oscillator3.h"
 #include "Envelope.h"
 #include "Filter.h"
 #include "Frontgui.h"
@@ -27,6 +28,7 @@ private:
     
     Oscillator oscGui;
     Oscillator2 osc2Gui;
+    Oscillator3 osc3Gui;
     Envelope envGui;
     Filter filterGui;
     Delay delayGui;
