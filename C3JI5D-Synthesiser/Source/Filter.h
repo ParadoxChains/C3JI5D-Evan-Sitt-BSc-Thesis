@@ -19,7 +19,7 @@ private:
     ComboBox filterMenu;
     
     ScopedPointer<AudioProcessorValueTreeState::ComboBoxAttachment> filterTypeVal;
-    ScopedPointer<AudioProcessorValueTreeState::SliderAttachment> filterVal;
+    ScopedPointer<AudioProcessorValueTreeState::SliderAttachment> filterCutoffVal;
     ScopedPointer<AudioProcessorValueTreeState::SliderAttachment> resVal;
     
     JuceSynthFrameworkAudioProcessor& processor;

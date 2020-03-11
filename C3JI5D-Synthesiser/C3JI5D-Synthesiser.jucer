@@ -19,6 +19,10 @@
   <MAINGROUP id="Z0T8fs" name="Evan Sitt Synthesiser">
     <GROUP id="{FDD0FFB0-7ABA-CAD0-AB6D-A607E5623CAE}" name="Source">
       <GROUP id="{52D67643-5272-5540-74BB-D17C6972D3E4}" name="GUI_Elements">
+        <FILE id="A8MfoD" name="Oscillator3.cpp" compile="1" resource="0" file="Source/Oscillator3.cpp"/>
+        <FILE id="OkAqyw" name="Oscillator3.h" compile="0" resource="0" file="Source/Oscillator3.h"/>
+        <FILE id="nOufey" name="Delay.cpp" compile="1" resource="0" file="Source/Delay.cpp"/>
+        <FILE id="vGyWUZ" name="Delay.h" compile="0" resource="0" file="Source/Delay.h"/>
         <FILE id="mAxG7m" name="Oscillator.cpp" compile="1" resource="0" file="Source/Oscillator.cpp"/>
         <FILE id="lwHWX8" name="Oscillator.h" compile="0" resource="0" file="Source/Oscillator.h"/>
         <FILE id="shQvqD" name="Envelope.cpp" compile="1" resource="0" file="Source/Envelope.cpp"/>
@@ -31,6 +35,8 @@
         <FILE id="Rm8On6" name="Oscillator2.h" compile="0" resource="0" file="Source/Oscillator2.h"/>
       </GROUP>
       <GROUP id="{FE402C17-A019-5FCE-32B1-065DC8E36DB3}" name="DSP">
+        <FILE id="UJxar6" name="Delays.cpp" compile="1" resource="0" file="Source/Delays.cpp"/>
+        <FILE id="W4KNhU" name="Delays.h" compile="0" resource="0" file="Source/Delays.h"/>
         <FILE id="btxltj" name="Envelopes.cpp" compile="1" resource="0" file="Source/Envelopes.cpp"/>
         <FILE id="O3CpuF" name="Envelopes.h" compile="0" resource="0" file="Source/Envelopes.h"/>
         <FILE id="d76Sdx" name="Filters.cpp" compile="1" resource="0" file="Source/Filters.cpp"/>
@@ -39,29 +45,6 @@
               file="Source/WaveformSynthesis.cpp"/>
         <FILE id="Nn9NCO" name="WaveformSynthesis.h" compile="0" resource="0"
               file="Source/WaveformSynthesis.h"/>
-      </GROUP>
-      <GROUP id="{B5469151-45EB-23CF-24BA-61DF6EF9FF89}" name="Maximilian">
-        <GROUP id="{36E659AE-2D63-AF3F-01D8-60F300C5308E}" name="libs">
-          <FILE id="R49E46" name="fft.cpp" compile="1" resource="0" file="../Maximilian/libs/fft.cpp"/>
-          <FILE id="znVdSM" name="fft.h" compile="0" resource="0" file="../Maximilian/libs/fft.h"/>
-          <FILE id="NoqGPd" name="maxiAtoms.cpp" compile="1" resource="0" file="../Maximilian/libs/maxiAtoms.cpp"/>
-          <FILE id="DSr1E9" name="maxiAtoms.h" compile="0" resource="0" file="../Maximilian/libs/maxiAtoms.h"/>
-          <FILE id="kPPk6v" name="maxiBark.cpp" compile="1" resource="0" file="../Maximilian/libs/maxiBark.cpp"/>
-          <FILE id="o7YhdV" name="maxiBark.h" compile="0" resource="0" file="../Maximilian/libs/maxiBark.h"/>
-          <FILE id="nsWTB2" name="maxiFFT.cpp" compile="1" resource="0" file="../Maximilian/libs/maxiFFT.cpp"/>
-          <FILE id="yknsqt" name="maxiFFT.h" compile="0" resource="0" file="../Maximilian/libs/maxiFFT.h"/>
-          <FILE id="ddDdGu" name="maxiGrains.cpp" compile="1" resource="0" file="../Maximilian/libs/maxiGrains.cpp"/>
-          <FILE id="jWzn5E" name="maxiGrains.h" compile="0" resource="0" file="../Maximilian/libs/maxiGrains.h"/>
-          <FILE id="bHYhvS" name="maxim.h" compile="0" resource="0" file="../Maximilian/libs/maxim.h"/>
-          <FILE id="NDPh6f" name="maxiMFCC.cpp" compile="1" resource="0" file="../Maximilian/libs/maxiMFCC.cpp"/>
-          <FILE id="Yzztay" name="maxiMFCC.h" compile="0" resource="0" file="../Maximilian/libs/maxiMFCC.h"/>
-          <FILE id="XpsJ1H" name="sineTable.h" compile="0" resource="0" file="../Maximilian/libs/sineTable.h"/>
-        </GROUP>
-        <FILE id="ev2jO4" name="main.cpp" compile="1" resource="0" file="../Maximilian/main.cpp"/>
-        <FILE id="cpCl3H" name="maximilian.cpp" compile="1" resource="0" file="../Maximilian/maximilian.cpp"/>
-        <FILE id="AxIpzQ" name="maximilian.h" compile="0" resource="0" file="../Maximilian/maximilian.h"/>
-        <FILE id="ViLnSZ" name="stb_vorbis.c" compile="1" resource="0" file="../Maximilian/stb_vorbis.c"/>
-        <FILE id="KzSFps" name="stb_vorbis.h" compile="0" resource="0" file="../Maximilian/stb_vorbis.h"/>
       </GROUP>
       <FILE id="Tn9AzU" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>

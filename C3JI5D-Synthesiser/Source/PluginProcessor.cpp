@@ -26,6 +26,10 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
                                              TRANS("Wave Type 2"),
                                        StringArray("Square", "Saw", "Triangle"/*, "Sine"*/),
                                                   0),
+            std::make_unique<AudioParameterChoice>("wavetype3",
+                                             TRANS("Wave Type 3"),
+                                       StringArray("Square", "Saw", "Triangle"/*, "Sine"*/),
+                                                  0),
 
             std::make_unique<AudioParameterChoice>("filterType",
                                             TRANS("Filter Type"),
@@ -34,7 +38,18 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
             std::make_unique<AudioParameterFloat>("filterCutoff", "FilterCutoff", NormalisableRange<float>(20.0f, 10000.0f), 400.0f),
             std::make_unique<AudioParameterFloat>("filterRes", "FilterRes", NormalisableRange<float>(1.0f, 5.0f), 1.0f),
 
+
+            std::make_unique<AudioParameterChoice>("delayType",
+                                            TRANS("Delay Type"),
+                                      StringArray("Delay","Flanger"),
+                                                 0),
+            std::make_unique<AudioParameterFloat>("delayTime", "DelayTime", NormalisableRange<float>(1.0f, 5.0f), 1.0f),
+            std::make_unique<AudioParameterFloat>("delayFeedback", "DelayFeedback", NormalisableRange<float>(1.0f, 5.0f), 1.0f),
+            std::make_unique<AudioParameterFloat>("delaySpeed", "DelaySpeed", NormalisableRange<float>(20.0f, 10000.0f), 400.0f),
+            std::make_unique<AudioParameterFloat>("delayDepth", "DelayDepth", NormalisableRange<float>(1.0f, 5.0f), 1.0f),
+
             std::make_unique<AudioParameterFloat>("blend", "Osc2Blend", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
+            std::make_unique<AudioParameterFloat>("blend2", "Osc3Blend", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
 
             std::make_unique<AudioParameterFloat>("mastergain", "MasterGain", NormalisableRange<float>(0.0f, 1.0f), 0.7f),
 
@@ -205,6 +220,15 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
                 tree.getRawParameterValue("filterCutoff")->load(),
                 tree.getRawParameterValue("filterRes")->load()
             );
+            /*
+            myVoice->getDelayParams(
+                tree.getRawParameterValue("delayType")->load(),
+                tree.getRawParameterValue("delayTime")->load(),
+                tree.getRawParameterValue("delayFeedback")->load(),
+                tree.getRawParameterValue("delaySpeed")->load(),
+                tree.getRawParameterValue("delayDepth")->load()
+            );
+            */
             myVoice->getEnvelopeParams(
                 tree.getRawParameterValue("attack")->load(),
                 tree.getRawParameterValue("decay")->load(),
@@ -214,11 +238,13 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
             
             myVoice->getOscType(tree.getRawParameterValue("wavetype")->load());
             myVoice->getOsc2Type(tree.getRawParameterValue("wavetype2")->load());
+            myVoice->getOsc3Type(tree.getRawParameterValue("wavetype3")->load());
             
             
             myVoice->getWillsParams(
                 tree.getRawParameterValue("mastergain")->load(),
                 tree.getRawParameterValue("blend")->load(),
+                tree.getRawParameterValue("blend2")->load(),
                 tree.getRawParameterValue("pbup")->load(),
                 tree.getRawParameterValue("pbdown")->load()
             );

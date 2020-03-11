@@ -2,15 +2,18 @@
 #include "PluginEditor.h"
 
 JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (JuceSynthFrameworkAudioProcessor& p)
-    : AudioProcessorEditor (&p), processor (p), oscGui(p), osc2Gui(p), envGui(p), filterGui(p), frontGui(p)
+    : AudioProcessorEditor (&p), processor (p), oscGui(p), osc2Gui(p), osc3Gui(p), envGui(p), filterGui(p), frontGui(p), delayGui(p)
 {
-    setSize (2000, 2000);
+    setSize (1550, 200);
     
     addAndMakeVisible(&oscGui);
     addAndMakeVisible(&osc2Gui);
+    addAndMakeVisible(&osc3Gui);
     addAndMakeVisible(&envGui);
     addAndMakeVisible(&filterGui);
+    addAndMakeVisible(&delayGui);
     addAndMakeVisible(&frontGui);
+
 }
 
 JuceSynthFrameworkAudioProcessorEditor::~JuceSynthFrameworkAudioProcessorEditor()
@@ -31,9 +34,12 @@ void JuceSynthFrameworkAudioProcessorEditor::resized()
     
     oscGui.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     osc2Gui.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+    osc3Gui.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     filterGui.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+    delayGui.setBounds(area.removeFromLeft(componentWidth*1.75).removeFromTop(componentHeight));
     envGui.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
     frontGui.setBounds(area.removeFromLeft(componentWidth).removeFromTop(componentHeight));
+
 }
 
 
