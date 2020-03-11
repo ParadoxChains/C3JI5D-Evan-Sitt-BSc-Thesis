@@ -4,7 +4,7 @@
 JuceSynthFrameworkAudioProcessorEditor::JuceSynthFrameworkAudioProcessorEditor (JuceSynthFrameworkAudioProcessor& p)
     : AudioProcessorEditor (&p), processor (p), oscGui(p), osc2Gui(p), osc3Gui(p), envGui(p), filterGui(p), frontGui(p), delayGui(p)
 {
-    setSize (2000, 2000);
+    setSize (1550, 200);
     
     addAndMakeVisible(&oscGui);
     addAndMakeVisible(&osc2Gui);

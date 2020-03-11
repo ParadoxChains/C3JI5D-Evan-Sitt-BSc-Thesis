@@ -46,29 +46,6 @@
         <FILE id="Nn9NCO" name="WaveformSynthesis.h" compile="0" resource="0"
               file="Source/WaveformSynthesis.h"/>
       </GROUP>
-      <GROUP id="{B5469151-45EB-23CF-24BA-61DF6EF9FF89}" name="Maximilian">
-        <GROUP id="{36E659AE-2D63-AF3F-01D8-60F300C5308E}" name="libs">
-          <FILE id="R49E46" name="fft.cpp" compile="1" resource="0" file="../Maximilian/libs/fft.cpp"/>
-          <FILE id="znVdSM" name="fft.h" compile="0" resource="0" file="../Maximilian/libs/fft.h"/>
-          <FILE id="NoqGPd" name="maxiAtoms.cpp" compile="1" resource="0" file="../Maximilian/libs/maxiAtoms.cpp"/>
-          <FILE id="DSr1E9" name="maxiAtoms.h" compile="0" resource="0" file="../Maximilian/libs/maxiAtoms.h"/>
-          <FILE id="kPPk6v" name="maxiBark.cpp" compile="1" resource="0" file="../Maximilian/libs/maxiBark.cpp"/>
-          <FILE id="o7YhdV" name="maxiBark.h" compile="0" resource="0" file="../Maximilian/libs/maxiBark.h"/>
-          <FILE id="nsWTB2" name="maxiFFT.cpp" compile="1" resource="0" file="../Maximilian/libs/maxiFFT.cpp"/>
-          <FILE id="yknsqt" name="maxiFFT.h" compile="0" resource="0" file="../Maximilian/libs/maxiFFT.h"/>
-          <FILE id="ddDdGu" name="maxiGrains.cpp" compile="1" resource="0" file="../Maximilian/libs/maxiGrains.cpp"/>
-          <FILE id="jWzn5E" name="maxiGrains.h" compile="0" resource="0" file="../Maximilian/libs/maxiGrains.h"/>
-          <FILE id="bHYhvS" name="maxim.h" compile="0" resource="0" file="../Maximilian/libs/maxim.h"/>
-          <FILE id="NDPh6f" name="maxiMFCC.cpp" compile="1" resource="0" file="../Maximilian/libs/maxiMFCC.cpp"/>
-          <FILE id="Yzztay" name="maxiMFCC.h" compile="0" resource="0" file="../Maximilian/libs/maxiMFCC.h"/>
-          <FILE id="XpsJ1H" name="sineTable.h" compile="0" resource="0" file="../Maximilian/libs/sineTable.h"/>
-        </GROUP>
-        <FILE id="ev2jO4" name="main.cpp" compile="1" resource="0" file="../Maximilian/main.cpp"/>
-        <FILE id="cpCl3H" name="maximilian.cpp" compile="1" resource="0" file="../Maximilian/maximilian.cpp"/>
-        <FILE id="AxIpzQ" name="maximilian.h" compile="0" resource="0" file="../Maximilian/maximilian.h"/>
-        <FILE id="ViLnSZ" name="stb_vorbis.c" compile="1" resource="0" file="../Maximilian/stb_vorbis.c"/>
-        <FILE id="KzSFps" name="stb_vorbis.h" compile="0" resource="0" file="../Maximilian/stb_vorbis.h"/>
-      </GROUP>
       <FILE id="Tn9AzU" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="KfsFJU" name="PluginProcessor.h" compile="0" resource="0"
