@@ -5,6 +5,7 @@
 #include "Oscillator.h"
 #include "Oscillator2.h"
 #include "Oscillator3.h"
+#include "LFO.h"
 #include "Envelope.h"
 #include "Filter.h"
 #include "Frontgui.h"
@@ -33,6 +34,7 @@ private:
     Filter filterGui;
     Delay delayGui;
     Frontgui frontGui;
+    LFO lfoGui;
 
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (JuceSynthFrameworkAudioProcessorEditor)

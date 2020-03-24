@@ -24,7 +24,7 @@ void Oscillator::paint (Graphics& g)
     
     g.fillAll (Colours::powderblue);
     g.setColour(Colours::slategrey);
-    g.drawText("Oscillator One", titleArea, Justification::centredTop);
+    g.drawText("Main Oscillator", titleArea, Justification::centredTop);
     
     juce::Rectangle <float> area (25, 25, 150, 150);
     
