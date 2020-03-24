@@ -13,32 +13,60 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
                      #endif
                        )
     , tree(*this, nullptr, "PARAMETERS",
-        {   std::make_unique<AudioParameterFloat>("attack", "Attack", NormalisableRange<float>(0.1f, 5000.0f), 0.1f),
-            std::make_unique<AudioParameterFloat>("decay", "Decay", NormalisableRange<float>(1.0f, 2000.0f), 1.0f),
-            std::make_unique<AudioParameterFloat>("sustain", "Sustain", NormalisableRange<float>(0.0f, 1.0f), 0.8f),
-            std::make_unique<AudioParameterFloat>("release", "Release", NormalisableRange<float>(0.1f, 5000.0f), 0.1f),
-
+        {   
+            //Envelope parameters
+            std::make_unique<AudioParameterFloat>("attack",
+                                                  "Attack",
+                                                  NormalisableRange<float>(0.1f, 5000.0f), 0.1f),
+            std::make_unique<AudioParameterFloat>("decay",
+                                                  "Decay",
+                                                  NormalisableRange<float>(1.0f, 2000.0f), 1.0f),
+            std::make_unique<AudioParameterFloat>("sustain",
+                                                  "Sustain",
+                                                  NormalisableRange<float>(0.0f, 1.0f), 0.8f),
+            std::make_unique<AudioParameterFloat>("release",
+                                                  "Release",
+                                                   NormalisableRange<float>(0.1f, 5000.0f), 0.1f),
+            //Main Oscillator Parameters
             std::make_unique<AudioParameterChoice>("wavetype",
                                              TRANS("Wave Type"),
                                        StringArray("Square", "Saw", "Triangle", "Sine"),
                                                   0),
+
+            //Additive Oscillator Parameters
             std::make_unique<AudioParameterChoice>("wavetype2",
                                              TRANS("Wave Type 2"),
                                        StringArray("Square", "Saw", "Triangle"/*, "Sine"*/),
                                                   0),
+            std::make_unique<AudioParameterFloat>("blend", "Osc2Blend", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
+            
+            //Subtractive Oscillator Parameters
             std::make_unique<AudioParameterChoice>("wavetype3",
                                              TRANS("Wave Type 3"),
                                        StringArray("Square", "Saw", "Triangle"/*, "Sine"*/),
                                                   0),
+            std::make_unique<AudioParameterFloat>("blend2", "Osc3Blend", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
 
+            //LFO Parameters
+            std::make_unique<AudioParameterChoice>("lfoSwitch",
+                                             TRANS("LFO Switch"),
+                                       StringArray("On","Off"),
+                                                  1),
+            std::make_unique<AudioParameterFloat>("lfoFreq",
+                                                  "LFO Frequency",
+                                                  NormalisableRange<float>(20.0f, 10000.0f),
+                                                  400.0f),
+            std::make_unique<AudioParameterFloat>("lfoBlend", "LFO Blend", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
+
+            //Filter Parameters
             std::make_unique<AudioParameterChoice>("filterType",
-                                            TRANS("Filter Type"),
-                                      StringArray("Low Pass","High Pass","Band Pass"),
-                                                 0),
+                                             TRANS("Filter Type"),
+                                       StringArray("Low Pass","High Pass","Band Pass"),
+                                                  0),
             std::make_unique<AudioParameterFloat>("filterCutoff", "FilterCutoff", NormalisableRange<float>(20.0f, 10000.0f), 400.0f),
             std::make_unique<AudioParameterFloat>("filterRes", "FilterRes", NormalisableRange<float>(1.0f, 5.0f), 1.0f),
 
-
+            //Delay Parameters
             std::make_unique<AudioParameterChoice>("delayType",
                                             TRANS("Delay Type"),
                                       StringArray("Delay","Flanger"),
@@ -48,8 +76,6 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
             std::make_unique<AudioParameterFloat>("delaySpeed", "DelaySpeed", NormalisableRange<float>(20.0f, 10000.0f), 400.0f),
             std::make_unique<AudioParameterFloat>("delayDepth", "DelayDepth", NormalisableRange<float>(1.0f, 5.0f), 1.0f),
 
-            std::make_unique<AudioParameterFloat>("blend", "Osc2Blend", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
-            std::make_unique<AudioParameterFloat>("blend2", "Osc3Blend", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
 
             std::make_unique<AudioParameterFloat>("mastergain", "MasterGain", NormalisableRange<float>(0.0f, 1.0f), 0.7f),
 
@@ -214,6 +240,12 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
         if ((myVoice = dynamic_cast<SynthVoice*>(mySynth.getVoice(i))))
         {
             myVoice->setSampleRates(48000);
+
+            myVoice->getLFOParams(
+                tree.getRawParameterValue("lfoSwitch")->load(),
+                tree.getRawParameterValue("lfoFreq")->load(),
+                tree.getRawParameterValue("lfoBlend")->load()
+            );
 
             myVoice->getFilterParams(
                 tree.getRawParameterValue("filterType")->load(),
