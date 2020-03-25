@@ -54,7 +54,7 @@ JuceSynthFrameworkAudioProcessor::JuceSynthFrameworkAudioProcessor()
                                                   1),
             std::make_unique<AudioParameterFloat>("lfoFreq",
                                                   "LFO Frequency",
-                                                  NormalisableRange<float>(20.0f, 10000.0f),
+                                                  NormalisableRange<float>(1.0f, 10000.0f),
                                                   400.0f),
             std::make_unique<AudioParameterFloat>("lfoBlend", "LFO Blend", NormalisableRange<float>(0.0f, 1.0f), 0.5f),
 

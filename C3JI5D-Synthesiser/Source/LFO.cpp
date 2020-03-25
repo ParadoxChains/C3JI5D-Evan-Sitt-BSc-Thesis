@@ -14,7 +14,7 @@ LFO::LFO(JuceSynthFrameworkAudioProcessor& p) :
     lfoSwitchVal = new AudioProcessorValueTreeState::ComboBoxAttachment(processor.tree, "lfoSwitch", lfoSwitch);
 
     lfoFreq.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    lfoFreq.setRange(20.0, 10000.0);
+    lfoFreq.setRange(1.0, 10000.0);
     lfoFreq.setValue(400.0);
     lfoFreq.setTextBoxStyle(Slider::NoTextBox, false, 0, 0);
     addAndMakeVisible(&lfoFreq);
