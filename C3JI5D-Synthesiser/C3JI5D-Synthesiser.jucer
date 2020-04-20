@@ -21,6 +21,8 @@
       <GROUP id="{52D67643-5272-5540-74BB-D17C6972D3E4}" name="GUI_Elements">
         <FILE id="mt6Hwr" name="LFO.cpp" compile="1" resource="0" file="Source/LFO.cpp"/>
         <FILE id="bW0lMC" name="LFO.h" compile="0" resource="0" file="Source/LFO.h"/>
+        <FILE id="ktCmQl" name="FM.cpp" compile="1" resource="0" file="Source/FM.cpp"/>
+        <FILE id="tdnr3K" name="FM.h" compile="0" resource="0" file="Source/FM.h"/>
         <FILE id="A8MfoD" name="Oscillator3.cpp" compile="1" resource="0" file="Source/Oscillator3.cpp"/>
         <FILE id="OkAqyw" name="Oscillator3.h" compile="0" resource="0" file="Source/Oscillator3.h"/>
         <FILE id="nOufey" name="Delay.cpp" compile="1" resource="0" file="Source/Delay.cpp"/>

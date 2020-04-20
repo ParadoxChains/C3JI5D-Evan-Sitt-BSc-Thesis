@@ -203,6 +203,7 @@ void SynthVoice::getDelayParams(float delayType, float dTime, float dFeedback, f
 
 double SynthVoice::setDelay(double sample)
 {
+    getDelayParams(0, 0.25, 0.1, 0.1, 0.1);
     switch (delayChoice)
     {
     case 0:
@@ -217,5 +218,5 @@ double SynthVoice::setDelay(double sample)
 
 double SynthVoice::giveSample()
 {
-    return masterGain * /*setDelay(*/setFilter(setEnvelope(setLFO(setOscType())))/*)*/;
+    return masterGain * setDelay(setDelay(setFilter(setEnvelope(setLFO(setOscType())))));
 }
