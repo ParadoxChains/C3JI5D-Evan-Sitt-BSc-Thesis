@@ -18,6 +18,9 @@
               cppLanguageStandard="latest">
   <MAINGROUP id="Z0T8fs" name="Evan Sitt Synthesiser">
     <GROUP id="{FDD0FFB0-7ABA-CAD0-AB6D-A607E5623CAE}" name="Source">
+      <GROUP id="{9504AAF7-C597-C7ED-AF43-A66C7992FF62}" name="Testing">
+        <FILE id="waLct4" name="catch.hpp" compile="0" resource="0" file="Source/Test/catch.hpp"/>
+      </GROUP>
       <GROUP id="{52D67643-5272-5540-74BB-D17C6972D3E4}" name="GUI_Elements">
         <FILE id="mt6Hwr" name="LFO.cpp" compile="1" resource="0" file="Source/LFO.cpp"/>
         <FILE id="bW0lMC" name="LFO.h" compile="0" resource="0" file="Source/LFO.h"/>

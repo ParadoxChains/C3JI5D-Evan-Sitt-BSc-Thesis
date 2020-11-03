@@ -9,6 +9,11 @@ oscillator::oscillator()
 	waveTableSize = 4800;
 }
 
+double oscillator::getPhase()
+{
+	return phase;
+}
+
 void oscillator::resetPhase(double newPhase)
 {
 	phase = newPhase;
@@ -23,7 +28,7 @@ double oscillator::sine(double frequency)
 {
 	double decimalPlaces;
 	double a, b, c, d, x, y, z;
-	phase += waveTableSize / ( sampleRate / (frequency));
+	phase += waveTableSize / (sampleRate / (frequency));
 	if (phase >= (waveTableSize - 1))
 	{
 		phase -= waveTableSize;
@@ -62,39 +67,39 @@ double oscillator::square(double frequency)
 	{
 		outputValue = 1.0;
 	}
-	if (phase >= waveTableSize)
+	phase += (waveTableSize / (sampleRate / (frequency)));
+	if (phase >= (waveTableSize - 1))
 	{
 		phase -= waveTableSize;
 	}
-	phase += ( waveTableSize / (sampleRate / (frequency)));
 	return outputValue;
 }
 
 double oscillator::saw(double frequency)
 {
-	outputValue = phase/waveTableSize;
-	if (phase >= waveTableSize)
+	outputValue = phase / waveTableSize;
+	phase += (waveTableSize / (sampleRate / (frequency)));
+	if (phase >= (waveTableSize - 1))
 	{
 		phase -= 2.0 * waveTableSize;
 	}
-	phase += (waveTableSize / (sampleRate / (frequency)));
 	return outputValue;
 }
 
 double oscillator::triangle(double frequency)
 {
-	if (phase >= waveTableSize)
+	phase += (waveTableSize / (sampleRate / (frequency)));
+	if (phase >= (waveTableSize - 1))
 	{
 		phase -= waveTableSize;
 	}
-	phase += (waveTableSize / (sampleRate / (frequency)));
 	if (phase <= 0.5 * waveTableSize)
 	{
-		outputValue = ((phase - (0.25 * waveTableSize)) * 4)/waveTableSize;
+		outputValue = ((phase - (0.25 * waveTableSize)) * 4) / waveTableSize;
 	}
 	else
 	{
-		outputValue = (((waveTableSize - phase) - (0.25 * waveTableSize)) * 4)/waveTableSize;
+		outputValue = (((waveTableSize - phase) - (0.25 * waveTableSize)) * 4) / waveTableSize;
 	}
 	return(outputValue);
 

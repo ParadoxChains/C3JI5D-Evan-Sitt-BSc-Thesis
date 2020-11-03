@@ -7,6 +7,7 @@ class oscillator
 {
 public:
 	oscillator();
+	double getPhase();
 	void resetPhase(double newPhase);
 	void resetPhase();
 	double sine(double frequency);
