@@ -140,3 +140,31 @@ TEST_F(OscillatorPhaseTest, TriangleSynthesisValueTest) {
 	osc1.resetPhase(4800 - 48);
 	EXPECT_FLOAT_EQ(osc1.triangle(480), -1) << "Synthesis failed at 360 degrees";
 }
+
+TEST_F(OscillatorPhaseTest, SineSynthesisValueRangeTest) {
+	for (int i = 0; i < 100; ++i) {
+		double testVal = abs(osc1.sine(480));
+		EXPECT_LE(testVal, 1) << "Synthesis value out of expected bounds [-1.0,1.0] at iteration "<< i;
+	}
+}
+
+TEST_F(OscillatorPhaseTest, SquareSynthesisValueRangeTest) {
+	for (int i = 0; i < 100; ++i) {
+		double testVal = abs(osc1.square(480));
+		EXPECT_LE(testVal, 1) << "Synthesis value out of expected bounds [-1.0,1.0] at iteration " << i;
+	}
+}
+
+TEST_F(OscillatorPhaseTest, SawSynthesisValueRangeTest) {
+	for (int i = 0; i < 100; ++i) {
+		double testVal = abs(osc1.saw(480));
+		EXPECT_LE(testVal, 1) << "Synthesis value out of expected bounds [-1.0,1.0] at iteration " << i;
+	}
+}
+
+TEST_F(OscillatorPhaseTest, TriangleSynthesisValueRangeTest) {
+	for (int i = 0; i < 100; ++i) {
+		double testVal = abs(osc1.triangle(480));
+		EXPECT_LE(testVal, 1) << "Synthesis value out of expected bounds [-1.0,1.0] at iteration " << i;
+	}
+}
