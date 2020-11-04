@@ -88,3 +88,55 @@ TEST_F(OscillatorPhaseTest, TriangleSynthesisPhaseResetTest) {
 	}
 	EXPECT_FLOAT_EQ(osc1.getPhase(), 0);
 }
+
+TEST_F(OscillatorPhaseTest, SineSynthesisValueTest) {
+	osc1.resetPhase(-48);
+	EXPECT_FLOAT_EQ(osc1.sine(480), 0) << "Synthesis failed at 0 degrees";
+	osc1.resetPhase(1200-48);
+	EXPECT_FLOAT_EQ(osc1.sine(480), 1) << "Synthesis failed at 90 degrees";
+	osc1.resetPhase(2400-48);
+	EXPECT_FLOAT_EQ(osc1.sine(480), 0.00000000000012668789) << "Synthesis failed at 180 degrees";
+	osc1.resetPhase(3600-48);
+	EXPECT_FLOAT_EQ(osc1.sine(480), -1) << "Synthesis failed at 270 degrees";
+	osc1.resetPhase(4800-48);
+	EXPECT_FLOAT_EQ(osc1.sine(480), 0) << "Synthesis failed at 360 degrees";
+}
+
+TEST_F(OscillatorPhaseTest, SquareSynthesisValueTest) {
+	osc1.resetPhase(-48);
+	EXPECT_FLOAT_EQ(osc1.square(480), -1) << "Synthesis failed at 0 degrees";
+	osc1.resetPhase(1200 - 48);
+	EXPECT_FLOAT_EQ(osc1.square(480), -1) << "Synthesis failed at 90 degrees";
+	osc1.resetPhase(2400 - 48);
+	EXPECT_FLOAT_EQ(osc1.square(480), -1) << "Synthesis failed at 180 degrees";
+	osc1.resetPhase(3600 - 48);
+	EXPECT_FLOAT_EQ(osc1.square(480), 1) << "Synthesis failed at 270 degrees";
+	osc1.resetPhase(4800 - 48);
+	EXPECT_FLOAT_EQ(osc1.square(480), 1) << "Synthesis failed at 360 degrees";
+}
+
+TEST_F(OscillatorPhaseTest, SawSynthesisValueTest) {
+	osc1.resetPhase(-48);
+	EXPECT_FLOAT_EQ(osc1.saw(480), -0.01) << "Synthesis failed at 0 degrees";
+	osc1.resetPhase(1200 - 48);
+	EXPECT_FLOAT_EQ(osc1.saw(480), 0.24) << "Synthesis failed at 90 degrees";
+	osc1.resetPhase(2400 - 48);
+	EXPECT_FLOAT_EQ(osc1.saw(480), 0.49) << "Synthesis failed at 180 degrees";
+	osc1.resetPhase(3600 - 48);
+	EXPECT_FLOAT_EQ(osc1.saw(480), 0.74) << "Synthesis failed at 270 degrees";
+	osc1.resetPhase(4800 - 48);
+	EXPECT_FLOAT_EQ(osc1.saw(480), 0.99) << "Synthesis failed at 360 degrees";
+}
+
+TEST_F(OscillatorPhaseTest, TriangleSynthesisValueTest) {
+	osc1.resetPhase(-48);
+	EXPECT_FLOAT_EQ(osc1.triangle(480), -1) << "Synthesis failed at 0 degrees";
+	osc1.resetPhase(1200 - 48);
+	EXPECT_FLOAT_EQ(osc1.triangle(480), 0) << "Synthesis failed at 90 degrees";
+	osc1.resetPhase(2400 - 48);
+	EXPECT_FLOAT_EQ(osc1.triangle(480), 1) << "Synthesis failed at 180 degrees";
+	osc1.resetPhase(3600 - 48);
+	EXPECT_FLOAT_EQ(osc1.triangle(480), 0) << "Synthesis failed at 270 degrees";
+	osc1.resetPhase(4800 - 48);
+	EXPECT_FLOAT_EQ(osc1.triangle(480), -1) << "Synthesis failed at 360 degrees";
+}
