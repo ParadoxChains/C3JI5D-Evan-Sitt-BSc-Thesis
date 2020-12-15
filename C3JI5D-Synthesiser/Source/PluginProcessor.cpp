@@ -252,15 +252,7 @@ void JuceSynthFrameworkAudioProcessor::processBlock (AudioSampleBuffer& buffer, 
                 tree.getRawParameterValue("filterCutoff")->load(),
                 tree.getRawParameterValue("filterRes")->load()
             );
-            /*
-            myVoice->getDelayParams(
-                tree.getRawParameterValue("delayType")->load(),
-                tree.getRawParameterValue("delayTime")->load(),
-                tree.getRawParameterValue("delayFeedback")->load(),
-                tree.getRawParameterValue("delaySpeed")->load(),
-                tree.getRawParameterValue("delayDepth")->load()
-            );
-            */
+
             myVoice->getEnvelopeParams(
                 tree.getRawParameterValue("attack")->load(),
                 tree.getRawParameterValue("decay")->load(),

@@ -189,7 +189,6 @@ double SynthVoice::setFilter(double sample)
         break;
     }
 
-    //return sample;
 }
 
 void SynthVoice::getDelayParams(float delayType, float dTime, float dFeedback, float dSpeed, float dDepth)
